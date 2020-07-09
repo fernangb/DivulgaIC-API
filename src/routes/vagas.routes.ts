@@ -6,17 +6,18 @@ const vagasRouter = Router();
 
 interface Vaga {
   id: string;
-  nome: string;
+  titulo: string;
   laboratorio: string;
-  areas: string[];
   professor: string;
+  curso: string;
   descricao: string;
-  cursos: string[];
-  vlBolsa: number;
-  qtdVagas: number;
-  crMinimo: number;
-  dtCriacao: Date;
-  dtFinalCandidatura: Date;
+  valorBolsa: number;
+  horasSemanais: number;
+  dtAbertura: Date;
+  dtValidade: Date | null;
+  aberta: boolean;
+  observacao: string | null;
+  crMinimo: number | null;
 }
 
 const vagas: Vaga[] = [];
@@ -24,21 +25,21 @@ const vagas: Vaga[] = [];
 // Criando vaga de IC
 vagasRouter.post('/', (request, response) => {
   const {
-    nome,
+    titulo,
     laboratorio,
-    areas,
     professor,
     descricao,
-    cursos,
-    vlBolsa,
-    qtdVagas,
+    curso,
+    valorBolsa,
+    horasSemanais,
     crMinimo,
-    dtCriacao,
-    dtFinalCandidatura,
+    dtAbertura,
+    dtValidade,
+    observacao,
   } = request.body;
 
-  const dtFinal = endOfDay(parseISO(dtFinalCandidatura));
-  const validarData = isAfter(dtCriacao, dtFinal);
+  const dtFinal = endOfDay(parseISO(dtValidade));
+  const validarData = isAfter(dtAbertura, dtFinal);
 
   if (validarData) {
     return response.status(400).json({
@@ -48,17 +49,18 @@ vagasRouter.post('/', (request, response) => {
 
   const vaga = {
     id: uuid(),
-    nome,
+    titulo,
     laboratorio,
-    areas,
     professor,
+    curso,
     descricao,
-    cursos,
-    vlBolsa,
-    qtdVagas,
+    valorBolsa,
+    horasSemanais,
+    dtAbertura,
+    dtValidade: dtFinal,
+    aberta: true,
+    observacao,
     crMinimo,
-    dtCriacao,
-    dtFinalCandidatura: dtFinal,
   };
 
   vagas.push(vaga);
