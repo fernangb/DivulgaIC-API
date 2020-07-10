@@ -1,43 +1,26 @@
 import { Router } from 'express';
-import { uuid } from 'uuidv4';
+import { getRepository } from 'typeorm';
+import CreateHabilidadeService from '../services/CreateHabilidadeService';
+import Habilidade from '../models/Habilidade';
 
 const habilidadesRouter = Router();
 
-interface Habilidade {
-  id: string;
-  nome: string;
-}
-
-const habilidades: Habilidade[] = [];
-
-habilidadesRouter.post('/', (request, response) => {
+habilidadesRouter.post('/', async (request, response) => {
   const { nome } = request.body;
 
-  const habilidade = {
-    id: uuid(),
-    nome,
-  };
+  const createHabilidadeService = new CreateHabilidadeService();
 
-  habilidades.push(habilidade);
+  const habilidade = await createHabilidadeService.execute({ nome });
 
   return response.json(habilidade);
 });
 
-habilidadesRouter.get('/', (request, response) => {
+habilidadesRouter.get('/', async (request, response) => {
+  const habilidadesRepository = getRepository(Habilidade);
+
+  const habilidades = await habilidadesRepository.find();
+
   return response.json(habilidades);
-});
-
-habilidadesRouter.put('/:id', (request, response) => {
-  const { nome } = request.body;
-  const { id } = request.params;
-
-  return response.json({ message: 'Atualizar habilidade' });
-});
-
-habilidadesRouter.delete('/:id', (request, response) => {
-  const { nome } = request.body;
-  const { id } = request.params;
-  return response.json({ message: 'Excluir habilidade' });
 });
 
 export default habilidadesRouter;

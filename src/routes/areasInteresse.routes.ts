@@ -1,43 +1,26 @@
 import { Router } from 'express';
-import { uuid } from 'uuidv4';
+import { getRepository } from 'typeorm';
+import CreateAreaInteresseService from '../services/CreateAreaInteresseService';
+import AreaInteresse from '../models/AreaInteresse';
 
-const areasInteresseRouter = Router();
+const areainteressesRouter = Router();
 
-interface AreaInteresse {
-  id: string;
-  nome: string;
-}
-
-const areasInteresse: AreaInteresse[] = [];
-
-areasInteresseRouter.post('/', (request, response) => {
+areainteressesRouter.post('/', async (request, response) => {
   const { nome } = request.body;
 
-  const areaInteresse = {
-    id: uuid(),
-    nome,
-  };
+  const createAreaInteresseService = new CreateAreaInteresseService();
 
-  areasInteresse.push(areaInteresse);
+  const areainteresse = await createAreaInteresseService.execute({ nome });
 
-  return response.json(areaInteresse);
+  return response.json(areainteresse);
 });
 
-areasInteresseRouter.get('/', (request, response) => {
-  return response.json(areasInteresse);
+areainteressesRouter.get('/', async (request, response) => {
+  const areainteressesRepository = getRepository(AreaInteresse);
+
+  const areainteresses = await areainteressesRepository.find();
+
+  return response.json(areainteresses);
 });
 
-areasInteresseRouter.put('/:id', (request, response) => {
-  const { nome } = request.body;
-  const { id } = request.params;
-
-  return response.json({ message: 'Atualizar areaInteresse' });
-});
-
-areasInteresseRouter.delete('/:id', (request, response) => {
-  const { nome } = request.body;
-  const { id } = request.params;
-  return response.json({ message: 'Excluir areaInteresse' });
-});
-
-export default areasInteresseRouter;
+export default areainteressesRouter;

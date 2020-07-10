@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import areasInteresseRouter from './areasInteresse.routes';
-import etapasRouter from './etapas.router';
+import etapasRouter from './etapas.routes';
 import habilidadesRouter from './habilidades.routes';
 import prediosRouter from './predios.routes';
 import vagasRouter from './vagas.routes';
