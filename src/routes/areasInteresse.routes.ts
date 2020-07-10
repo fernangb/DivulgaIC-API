@@ -10,9 +10,9 @@ areasInteresseRouter.post('/', async (request, response) => {
 
   const createAreaInteresseService = new CreateAreaInteresseService();
 
-  const areainteresse = await createAreaInteresseService.execute({ nome });
+  const areaInteresse = await createAreaInteresseService.execute({ nome });
 
-  return response.json(areainteresse);
+  return response.json(areaInteresse);
 });
 
 areasInteresseRouter.get('/', async (request, response) => {
