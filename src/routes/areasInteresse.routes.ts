@@ -3,9 +3,9 @@ import { getRepository } from 'typeorm';
 import CreateAreaInteresseService from '../services/CreateAreaInteresseService';
 import AreaInteresse from '../models/AreaInteresse';
 
-const areainteressesRouter = Router();
+const areasInteresseRouter = Router();
 
-areainteressesRouter.post('/', async (request, response) => {
+areasInteresseRouter.post('/', async (request, response) => {
   const { nome } = request.body;
 
   const createAreaInteresseService = new CreateAreaInteresseService();
@@ -15,12 +15,12 @@ areainteressesRouter.post('/', async (request, response) => {
   return response.json(areainteresse);
 });
 
-areainteressesRouter.get('/', async (request, response) => {
-  const areainteressesRepository = getRepository(AreaInteresse);
+areasInteresseRouter.get('/', async (request, response) => {
+  const areasInteresseRepository = getRepository(AreaInteresse);
 
-  const areainteresses = await areainteressesRepository.find();
+  const areasInteresse = await areasInteresseRepository.find();
 
-  return response.json(areainteresses);
+  return response.json(areasInteresse);
 });
 
-export default areainteressesRouter;
+export default areasInteresseRouter;
