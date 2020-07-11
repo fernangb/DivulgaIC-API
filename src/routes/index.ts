@@ -5,6 +5,7 @@ import skillsRouter from './skills.routes';
 import buildingsRouter from './buildings.routes';
 import coursesRouter from './courses.routes';
 import laboratoriesRouter from './laboratories.routes';
+import teachersRouter from './teachers.routes';
 
 const routes = Router();
 routes.use('/areas', areasRouter);
@@ -13,5 +14,6 @@ routes.use('/skills', skillsRouter);
 routes.use('/buildings', buildingsRouter);
 routes.use('/courses', coursesRouter);
 routes.use('/laboratories', laboratoriesRouter);
+routes.use('/teachers', teachersRouter);
 
 export default routes;
