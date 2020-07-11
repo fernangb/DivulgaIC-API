@@ -6,13 +6,19 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('areas_interesse')
-class AreaInteresse {
+@Entity('buildings')
+class Building {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  nome: string;
+  title: string;
+
+  @Column()
+  initials: string;
+
+  @Column()
+  address: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -21,4 +27,4 @@ class AreaInteresse {
   updated_at: Date;
 }
 
-export default AreaInteresse;
+export default Building;

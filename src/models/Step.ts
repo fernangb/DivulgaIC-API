@@ -6,19 +6,13 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('predios')
-class Predio {
+@Entity('steps')
+class Step {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  nome: string;
-
-  @Column()
-  sigla: string;
-
-  @Column()
-  endereco: string;
+  title: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -27,4 +21,4 @@ class Predio {
   updated_at: Date;
 }
 
-export default Predio;
+export default Step;

@@ -6,13 +6,13 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('etapas')
-class Etapa {
+@Entity('skills')
+class Skill {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  nome: string;
+  title: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -21,4 +21,4 @@ class Etapa {
   updated_at: Date;
 }
 
-export default Etapa;
+export default Skill;

@@ -1,15 +1,13 @@
 import { Router } from 'express';
-import areasInteresseRouter from './areasInteresse.routes';
-import etapasRouter from './etapas.routes';
-import habilidadesRouter from './habilidades.routes';
-import prediosRouter from './predios.routes';
-import vagasRouter from './vagas.routes';
+import areasRouter from './areas.routes';
+import stepsRouter from './steps.routes';
+import skillsRouter from './skills.routes';
+import buildingsRouter from './buildings.routes';
 
 const routes = Router();
-routes.use('/areasInteresse', areasInteresseRouter);
-routes.use('/etapas', etapasRouter);
-routes.use('/habilidades', habilidadesRouter);
-routes.use('/predios', prediosRouter);
-routes.use('/vagas', vagasRouter);
+routes.use('/areas', areasRouter);
+routes.use('/steps', stepsRouter);
+routes.use('/skills', skillsRouter);
+routes.use('/buildings', buildingsRouter);
 
 export default routes;
