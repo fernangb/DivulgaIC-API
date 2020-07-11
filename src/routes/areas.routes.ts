@@ -6,13 +6,17 @@ import Area from '../models/Area';
 const areasRouter = Router();
 
 areasRouter.post('/', async (request, response) => {
-  const { title } = request.body;
+  try {
+    const { title } = request.body;
 
-  const createAreaService = new CreateAreaService();
+    const createAreaService = new CreateAreaService();
 
-  const area = await createAreaService.execute({ title });
+    const area = await createAreaService.execute({ title });
 
-  return response.json(area);
+    return response.json(area);
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
+  }
 });
 
 areasRouter.get('/', async (request, response) => {

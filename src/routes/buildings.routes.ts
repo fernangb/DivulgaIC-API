@@ -6,17 +6,21 @@ import Building from '../models/Building';
 const buildingsRouter = Router();
 
 buildingsRouter.post('/', async (request: Request, response: Response) => {
-  const { title, address, initials } = request.body;
+  try {
+    const { title, address, initials } = request.body;
 
-  const createBuildingService = new CreateBuildingService();
+    const createBuildingService = new CreateBuildingService();
 
-  const building = await createBuildingService.execute({
-    title,
-    address,
-    initials,
-  });
+    const building = await createBuildingService.execute({
+      title,
+      address,
+      initials,
+    });
 
-  return response.json(building);
+    return response.json(building);
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
+  }
 });
 
 buildingsRouter.get('/', async (request, response) => {

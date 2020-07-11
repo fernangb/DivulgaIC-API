@@ -6,13 +6,17 @@ import Step from '../models/Step';
 const stepsRouter = Router();
 
 stepsRouter.post('/', async (request, response) => {
-  const { title } = request.body;
+  try {
+    const { title } = request.body;
 
-  const createStepService = new CreateStepService();
+    const createStepService = new CreateStepService();
 
-  const etapa = await createStepService.execute({ title });
+    const step = await createStepService.execute({ title });
 
-  return response.json(etapa);
+    return response.json(step);
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
+  }
 });
 
 stepsRouter.get('/', async (request, response) => {

@@ -9,8 +9,8 @@ import {
 } from 'typeorm';
 import Building from './Building';
 
-@Entity('courses')
-class Course {
+@Entity('laboratories')
+class Laboratory {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -19,6 +19,15 @@ class Course {
 
   @Column()
   initials: string;
+
+  @Column()
+  site?: string;
+
+  @Column()
+  email?: string;
+
+  @Column()
+  avatar_url?: string;
 
   @Column()
   location: string;
@@ -37,4 +46,4 @@ class Course {
   updated_at: Date;
 }
 
-export default Course;
+export default Laboratory;
